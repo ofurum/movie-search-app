@@ -1,7 +1,8 @@
-import React, { Component } from 'react';
-import './App.css';
-import {SearchBox} from './components/searchField/searchField.component'
-import {CardList} from './components/cardList/cardList.component'
+import React, { Component } from "react";
+// import _ from "lodash";
+import "./App.css";
+import { SearchBox } from "./components/searchField/searchField.component";
+import { CardList } from "./components/cardList/cardList.component";
 
 class App extends Component {
   constructor() {
@@ -11,48 +12,38 @@ class App extends Component {
 
       searchField: "",
     };
-     this.handleChange = this.handleChange.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
- async componentDidMount(){
-    await this.searchForMovies()
+  async componentDidMount() {
+    this.searchForMovies(this.state.searchField);
   }
 
-    searchForMovies(searchField) {
-      fetch(
-        `http://www.omdbapi.com/?s=${searchField}&apikey=6a3b9a04`
-      )
-        .then((resp) => resp.json())
-        .then((body) => this.setState({ listofMovies: body })); 
+  searchForMovies(searchField) {
+    console.log(searchField);
+    fetch(`http://www.omdbapi.com/?s=${searchField}&apikey=6a3b9a04`)
+      .then((resp) => resp.json())
+      .then((body) => this.setState({ listofMovies: body }));
   }
 
-  componentWillMount(){
-      
-  }
-
-
+  /** you may not need this function again */
   handleChange(e) {
-     const { value } = e.target;
-    // this.setState({ searchField: this.searchForMovies(value) });
-    this.setState({ searchField: value });
-    console.log(value)
+    const { value } = e.target;
   }
 
-  
   render() {
     const { searchField, listofMovies } = this.state;
 
-    console.log(listofMovies)
+    console.log(listofMovies);
     return (
       <div className="App">
         <div>
-          <form onSubmit={() => this.searchForMovies(searchField)}>
-            <SearchBox
-              value={searchField}
-              placeholder="search for movies"
-              handleChange={this.handleChange}
-            />
-          </form>
+          <SearchBox
+            value={searchField}
+            placeholder="search for movies"
+            handleChange={this.handleChange}
+            onEnter={(e) => this.searchForMovies(e.target.value)}
+          />
         </div>
         <div>
           <CardList />
