@@ -23,7 +23,7 @@ class App extends Component {
     console.log(searchField);
     fetch(`http://www.omdbapi.com/?s=${searchField}&apikey=6a3b9a04`)
       .then((resp) => resp.json())
-      .then((body) => this.setState({ listofMovies: body }));
+      .then((body) => Array.isArray(body) && this.setState({ listofMovies:  this.cleanContent(body)}));
   }
 
   /** you may not need this function again */
@@ -31,6 +31,11 @@ class App extends Component {
     const { value } = e.target;
   }
 
+  cleanContent(apiData){
+    console.log('api' ,apiData)
+      return apiData.map(data => data.Search)
+  }
+ 
   render() {
     const { searchField, listofMovies } = this.state;
 
@@ -46,7 +51,7 @@ class App extends Component {
           />
         </div>
         <div>
-          <CardList />
+          <CardList listofMovies={this.state.listofMovies} />
         </div>
       </div>
     );
