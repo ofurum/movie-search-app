@@ -1,6 +1,6 @@
 import React from 'react'
 import './searchField.style.css'
-export const SearchField = ({placeholder, handleChange, searchField}) => {
+export const SearchBox = ({placeholder, handleChange, searchField}) => {
   return (
     <div className="search">
       <label htmlFor = "search">
