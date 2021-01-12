@@ -3,7 +3,6 @@ import React, { Component } from "react";
 import "./App.css";
 import { SearchBox } from "./components/searchField/searchField.component";
 import { CardList } from "./components/cardList/cardList.component";
-import { NomineeCard } from './components/nomineeCard/nomineeCard.component'
 
 class App extends Component {
   constructor() {
@@ -17,45 +16,41 @@ class App extends Component {
   }
 
   async componentDidMount() {
-    // this.searchForMovies(this.state.searchField);
-    console.log('component', this.state.listofMovies.length)
+    this.searchForMovies(this.state.searchField);
   }
-   
+
   searchForMovies(searchField) {
     // console.log(searchField);
     fetch(`http://www.omdbapi.com/?s=${searchField}&apikey=6a3b9a04`)
       .then((resp) => resp.json())
       .then((body) =>
-        this.setState({ listofMovies : body.Search })
+        this.setState({ listofMovies: this.cleanContent(body.Search) })
       );
   }
 
   /** you may not need this function again */
   handleChange(e) {
     const { value } = e.target;
-    this.setState({ searchField : value})
+    this.setState({ searchField: value });
   }
 
-  cleanContent(apiData){
-    let listOfApi
+  cleanContent(apiData) {
+    let listOfApi;
     console.log("api", apiData);
-    if(apiData){
-       listOfApi = apiData.map((data) => {
-          return(data)
-        })
+    if (apiData) {
+      listOfApi = apiData.map((data) => {
+        return data;
+      });
     }
-       return listOfApi
+    return listOfApi;
   }
- 
+
   render() {
     const { searchField, listofMovies } = this.state;
     //  const apiData = listofMovies.filter(movies => (
     //  movies.toLowercase().includes(searchField.toLowercase())
     //  ))
-    console.log('main state', listofMovies);
-    const allCardList = listofMovies.map((movie, index) => {
-         return   <CardList key = {index} movieData ={movie} />
-  })
+    console.log(listofMovies);
     return (
       <div className="App">
         <div>
@@ -66,15 +61,8 @@ class App extends Component {
             onEnter={(e) => this.searchForMovies(e.target.value)}
           />
         </div>
-
-        <div style={{display: 'flex', justifyContent: 'space-around'}}>
-          <div className="">
-            {listofMovies.length}
-            {allCardList}
-          </div>
-          <div>
-            <NomineeCard />
-          </div>
+        <div>
+          <CardList listofMovie={listofMovies} />
         </div>
       </div>
     );
