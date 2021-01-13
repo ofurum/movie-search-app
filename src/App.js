@@ -3,14 +3,14 @@ import React, { Component } from "react";
 import "./App.css";
 import { SearchBox } from "./components/searchField/searchField.component";
 import { CardList } from "./components/cardList/cardList.component";
-import { NomineeCard } from './components/nomineeCard/nomineeCard.component'
+import { NomineeCard } from "./components/nomineeCard/nomineeCard.component";
 
 class App extends Component {
   constructor() {
     super();
     this.state = {
       listofMovies: [],
-
+      nominations: [],
       searchField: "",
     };
     this.handleChange = this.handleChange.bind(this);
@@ -18,44 +18,55 @@ class App extends Component {
 
   async componentDidMount() {
     // this.searchForMovies(this.state.searchField);
-    console.log('component', this.state.listofMovies.length)
+    console.log("component", this.state.listofMovies.length);
   }
-   
+
   searchForMovies(searchField) {
     // console.log(searchField);
     fetch(`http://www.omdbapi.com/?s=${searchField}&apikey=6a3b9a04`)
       .then((resp) => resp.json())
-      .then((body) =>
-        this.setState({ listofMovies : body.Search })
-      );
+      .then((body) => this.setState({ listofMovies: body.Search }));
   }
 
   /** you may not need this function again */
   handleChange(e) {
     const { value } = e.target;
-    this.setState({ searchField : value})
+    this.setState({ searchField: value });
   }
 
-  cleanContent(apiData){
-    let listOfApi
+  cleanContent(apiData) {
+    let listOfApi;
     console.log("api", apiData);
-    if(apiData){
-       listOfApi = apiData.map((data) => {
-          return(data)
-        })
+    if (apiData) {
+      listOfApi = apiData.map((data) => {
+        return data;
+      });
     }
-       return listOfApi
+    return listOfApi;
   }
- 
+
+  handleNomination = (movieData) => {
+    this.setState((state) => ({
+      ...state,
+      nominations: [...state.nominations, movieData],
+    }));
+  };
+
   render() {
-    const { searchField, listofMovies } = this.state;
+    const { searchField, listofMovies, nominations } = this.state;
     //  const apiData = listofMovies.filter(movies => (
     //  movies.toLowercase().includes(searchField.toLowercase())
     //  ))
-    console.log('main state', listofMovies);
+    console.log("main state", listofMovies);
     const allCardList = listofMovies.map((movie, index) => {
-         return   <CardList key = {index} movieData ={movie} />
-  })
+      return (
+        <CardList
+          onNominate={this.handleNomination}
+          key={index}
+          movieData={movie}
+        />
+      );
+    });
     return (
       <div className="App">
         <div>
@@ -67,13 +78,13 @@ class App extends Component {
           />
         </div>
 
-        <div style={{display: 'flex', justifyContent: 'space-around'}}>
+        <div style={{ display: "flex", justifyContent: "space-around" }}>
           <div className="">
             {listofMovies.length}
             {allCardList}
           </div>
           <div>
-            <NomineeCard />
+            <NomineeCard nominations={nominations} />
           </div>
         </div>
       </div>
