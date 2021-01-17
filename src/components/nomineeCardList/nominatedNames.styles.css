@@ -1,0 +1,11 @@
+
+ul li{
+    font-size: 20px;
+    color: white
+}
+
+.fas{
+    color: red;
+    cursor: pointer;
+    margin-left: 5px
+}

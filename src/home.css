@@ -1,0 +1,28 @@
+.movies{
+    margin-left: auto;
+}
+
+.bookmark{
+    display: none;
+}
+
+@media screen and (max-width: 720px){
+    .head-title{
+        font-size: smaller;
+    }
+
+    .sub-head{
+        font-size: smaller;
+    }
+
+    .main-body{
+        display: block;
+    }
+
+   .bookmark{
+       display: inline;
+       font-size: 50px;
+       color: #FFFFFF;
+        margin-left: 320px;
+   }
+}

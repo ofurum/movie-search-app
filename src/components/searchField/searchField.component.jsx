@@ -15,13 +15,13 @@ export const SearchBox = ({
   return (
     <div className="search">
       <label htmlFor="search">
-        <h5>Movie title</h5>
         <input
           type="search"
           onKeyDown={handleKeyDown}
           placeholder={placeholder}
           value={searchField}
           onChange={handleChange}
+          className="search-length"
         />
       </label>
     </div>

@@ -37,12 +37,27 @@
   }
 }
 
-.card-section{
+/* .card-section{
   display: flex;
   justify-content: space-around;
   margin-top: 20px;
-}
+} */
 
 body{
-  background: rgb(223, 219, 219);
+  background: #88BDBC;
+  font-family: 'Poppins', sans-serif;
+}
+
+.error{
+  color: red
+}
+
+.main-body{
+  display: flex;
+}
+
+.spinner{
+  margin-top:  50px;
+  font-size: 80px;
+  text-align: center
 }

@@ -1,0 +1,83 @@
+
+
+.button{
+    background: rgba(0, 0, 0, 0.685);
+    border-top-left-radius: 10px;
+     border-top-right-radius: 10px
+}
+
+.eachCardBackGround{
+    height: 40vh;
+    border-radius: 10px;
+    background-size: cover;
+    cursor: pointer;
+    margin: auto;
+}
+
+.eachCardBackGround:hover{
+   opacity: 0.7
+}
+
+.fas{
+    color: #ffff;
+   
+}
+
+.icon{
+    margin-left: 108px;
+}
+
+.movie-label{
+    display: flex;
+    justify-content: center;
+    font-size: small;
+    margin-top: 10px;
+}
+
+.movie-year{
+    margin-left: 10px;
+    background-color: rgb(238, 230, 230);
+    padding: 10px;
+    border-radius: 5px
+}
+
+.movie-title{
+    background-color: rgb(238, 230, 230);
+    padding: 10px;
+    border-radius: 5px
+}
+
+@media screen and (max-width: 720px) {
+    .eachCardBackGround{
+    height: 20vh;
+    border-radius: 10px;
+    background-size: cover;
+    margin: 50px;
+}
+
+ movie-title{
+    background-color: rgb(238, 230, 230);
+    border-radius: 5px;
+    font-size: 10px
+}
+
+.movie-label{
+    display: block;
+    text-align: center
+}
+.button{
+    background: rgba(0, 0, 0, 0.685);
+    border-top-left-radius: 10px;
+     border-top-right-radius: 10px
+}
+.icon{
+    margin-left: auto;
+}
+
+.movie-year{
+    background-color: rgb(238, 230, 230);
+    padding: 5px;
+    border-radius: 5px;
+    margin-top: 5px
+}
+}

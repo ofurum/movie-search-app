@@ -1,4 +1,13 @@
-.card-section {
-    display: flex;
-    background: pink;
+.movie-card{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 50px;
+    row-gap: 50px
+}
+
+@media screen and (max-width: 720px){
+    .movie-card{
+    display: block;
+    margin: 40px;
+}
 }
