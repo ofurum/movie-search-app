@@ -31,7 +31,7 @@ class Home extends Component {
     if (searchField.length === 0) {
       error.innerHTML = "please input a movie name";
     }
-    fetch(`http://www.omdbapi.com/?s=${searchField}&apikey=6a3b9a04`)
+    fetch(`https://www.omdbapi.com/?s=${searchField}&apikey=6a3b9a04`)
       .then((resp) => resp.json())
       .then((body) => {
         if (body.Response === "True") {
@@ -43,24 +43,13 @@ class Home extends Component {
       });
   }
 
-  /** you may not need this function again */
   handleChange(e) {
     const { value } = e.target;
     localStorage.setItem('movie name', value)
     this.setState({ searchField: value });
   }
 
-  cleanContent(apiData) {
-    let listOfApi;
-    console.log("api", apiData);
-    if (apiData) {
-      listOfApi = apiData.map((data) => {
-        return data;
-      });
-    }
-    return listOfApi;
-  }
-
+ 
   handleNomination = (movieData) => {
     const {nominations}= this.state;
     nominations.push(movieData);
@@ -113,7 +102,7 @@ class Home extends Component {
             value={searchField}
             placeholder="search for movies"
             handleChange={this.handleChange}
-            onEnter={(e) => this.searchForMovies(e.target.value)}
+            onSubmit={() => this.searchForMovies(this.state.searchField)}
           />
         </div>
         <span className="error"></span>
